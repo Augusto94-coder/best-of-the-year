@@ -3,10 +3,12 @@ package org.lessons.java.best_of_the_year.model;
 public class Song {
     private int id;
     private String title;
+    private String artist;
 
-    public Song(int id, String title) {
+    public Song(int id, String title, String artist) {
         this.id = id;
         this.title = title;
+        this.artist = artist;
     }
 
     public int getId() {
@@ -15,5 +17,8 @@ public class Song {
 
     public String getTitle() {
         return title;
+    }
+    public String getArtist(){
+        return artist;
     }
 }
