@@ -1,12 +1,43 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Best Movies</title>
 </head>
 <body>
     <h1>Best Movies</h1>
-     <p th:text="${titoli}"></p>
+      <p th:text="${titoli}"></p> 
+      <p th:text="${movies}"></p>
 
     <a href="/">Torna alla home</a>
 </body>
+</html> -->
+
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/layout :: head('Movies')"></head>
+
+<body>
+    <nav th:replace="fragments/layout :: navbar"></nav>
+
+    <main class="container my-4">
+        <h1 class="mb-4">Movies</h1>
+
+        <div class="d-flex flex-column align-items-center">
+            <div class="card w-50" th:each="movie : ${movies}">
+                <div class="card-body text-center">
+                    <h5 class="card-title">
+                        <a th:href="@{/movies/{id}(id=${movie.id})}" th:text="${movie.title}">
+                            Titolo
+                        </a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+        <a class="btn btn-outline-secondary mb-3" th:href="@{/}">Home</a>
+    </main>
+
+    <footer th:replace="fragments/layout :: footer"></footer>
+</body>
+
 </html>

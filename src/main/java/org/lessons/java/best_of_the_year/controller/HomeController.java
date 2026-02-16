@@ -22,15 +22,18 @@ public class HomeController {
     @GetMapping("/movies")
     public String movies(Model model) {
         List<Movie> movies = getBestMovies();
-        String titoli = "";
-
-        for (Movie movie : movies) {
-            titoli += movie.getTitle() + ", ";
-        }
-        if (!titoli.isEmpty()) {
-            titoli = titoli.substring(0, titoli.length() - 2);
-        }
-        model.addAttribute("titoli", titoli);
+        /*
+         * String titoli = "";
+         * 
+         * for (Movie movie : movies) {
+         * titoli += movie.getTitle() + ", ";
+         * }
+         * if (!titoli.isEmpty()) {
+         * titoli = titoli.substring(0, titoli.length() - 2);
+         * }
+         * model.addAttribute("titoli", titoli);
+         */
+        model.addAttribute("movies", movies);
         return "movies";
     }
 
@@ -38,48 +41,77 @@ public class HomeController {
     public String songs(Model model) {
 
         List<Song> songs = getBestSongs();
-        String titoli = "";
-
-        for (Song song : songs) {
-            titoli += song.getTitle() + ", ";
-        }
-        if (!titoli.isEmpty()) {
-            titoli = titoli.substring(0, titoli.length() - 2);
-        }
-        model.addAttribute("titoli", titoli);
+        /*
+         * String titoli = "";
+         * 
+         * for (Song song : songs) {
+         * titoli += song.getTitle() + ", ";
+         * }
+         * if (!titoli.isEmpty()) {
+         * titoli = titoli.substring(0, titoli.length() - 2);
+         * }
+         * model.addAttribute("titoli", titoli);
+         */
+        model.addAttribute("songs", songs);
         return "songs";
     }
 
     @GetMapping("/movies/{id}")
     public String movieDetails(@PathVariable("id") Integer movieId, Model model) {
-        String details = "";
-        for (int i = 0; i < getBestMovies().size(); i++) {
-            Movie movie = getBestMovies().get(i);
-            if (movieId == movie.getId()) {
-                details = movie.getTitle();
+        /*
+         * String details = "";
+         * for (int i = 0; i < getBestMovies().size(); i++) {
+         * Movie movie = getBestMovies().get(i);
+         * if (movieId == movie.getId()) {
+         * details = movie.getTitle();
+         * break;
+         * } else {
+         * details = "Nessun film trovato";
+         * }
+         * }
+         * 
+         * model.addAttribute("movieDetail", details);
+         * return "movie-detail";
+         * }
+         */
+        Movie found = null;
+        for (Movie movie : getBestMovies()) {
+            if (movieId.equals(movie.getId())) {
+                found = movie;
                 break;
-            } else {
-                details = "Nessun film trovato";
             }
         }
 
-        model.addAttribute("movieDetail", details);
+        model.addAttribute("movie", found);
         return "movie-detail";
     }
 
     @GetMapping("/songs/{id}")
     public String songDetail(@PathVariable("id") Integer songId, Model model) {
-        String details = "";
-        for (int i = 0; i < getBestSongs().size(); i++) {
-            Song song = getBestSongs().get(i);
-            if (songId == song.getId()) {
-                details = song.getTitle() + ", " + song.getArtist();
+        /*
+         * String details = "";
+         * for (int i = 0; i < getBestSongs().size(); i++) {
+         * Song song = getBestSongs().get(i);
+         * if (songId == song.getId()) {
+         * details = song.getTitle() + ", " + song.getArtist();
+         * break;
+         * } else {
+         * details = "Nessuna canzone trovata";
+         * }
+         * }
+         * model.addAttribute("songDetail", details);
+         * return "song-detail";
+         * }
+         */
+        Song found = null;
+        for (Song song : getBestSongs()) {
+            if (songId.equals(song.getId())) {
+                found = song;
                 break;
-            } else {
-                details = "Nessuna canzone trovata";
             }
         }
-        model.addAttribute("songDetail", details);
+
+        model.addAttribute("song", found);
         return "song-detail";
     }
 

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Best Songs</title>
@@ -9,4 +9,34 @@
 
     <a href="/">Torna alla home</a>
 </body>
+</html> -->
+
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/layout :: head('Songs')"></head>
+
+<body>
+    <nav th:replace="fragments/layout :: navbar"></nav>
+
+    <main class="container my-4">
+        <h1 class="mb-4">Songs</h1>
+
+        <div class="d-flex flex-column align-items-center">
+            <div class="card w-50" th:each="song : ${songs}">
+                <div class="card-body text-center">
+                    <h5 class="card-title">
+                        <a th:href="@{/songs/{id}(id=${song.id})}" th:text="${song.title}" >
+                            Titolo
+                        </a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+        <a class="btn btn-outline-secondary mb-3" th:href="@{/}">Home</a>
+    </main>
+
+    <footer th:replace="fragments/layout :: footer"></footer>
+</body>
+
 </html>

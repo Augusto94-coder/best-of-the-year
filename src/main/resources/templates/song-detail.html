@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Song Detail</title>
@@ -12,4 +12,33 @@
 <a href="/">Home</a>
 
 </body>
+</html> -->
+
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/layout :: head('Songs')"></head>
+
+<body>
+    <nav th:replace="fragments/layout :: navbar"></nav>
+
+    <main class="container my-4">
+        <h1>Song detail</h1>
+
+        <div th:if="${song != null}">
+            <p><strong>Titolo:</strong> <span th:text="${song.title}"></span></p>
+            <p><strong>Artista:</strong> <span th:text="${song.artist}"></span></p>
+        </div>
+
+        <div th:if="${song == null}">
+            <p>Nessuna canzone trovata</p>
+        </div>
+
+        <a href="/songs">Torna alle songs</a> |
+        <a href="/">Home</a>
+    </main>
+
+    <footer th:replace="fragments/layout :: footer"></footer>
+</body>
+
 </html>
